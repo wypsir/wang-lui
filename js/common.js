@@ -24,6 +24,33 @@ layui.define('layer', function (exports) {
         msgError: function (msg) {
             layer.msg(msg, {icon: 5})
             return;
+        },
+        data:function (table, settings) {
+            //本地存储
+                table = table || 'wui';
+
+                if(!window.JSON || !window.JSON.parse) return;
+
+                //如果settings为null，则删除表
+                if(settings === null){
+                    return delete sessionStorage[table];
+                }
+
+                settings = typeof settings === 'object'
+                    ? settings
+                    : {key: settings};
+
+                try{
+                    var data = JSON.parse(sessionStorage[table]);
+                } catch(e){
+                    var data = {};
+                }
+
+                if(settings.value) data[settings.key] = settings.value;
+                if(settings.remove) delete data[settings.key];
+                sessionStorage[table] = JSON.stringify(data);
+
+                return settings.key ? data[settings.key] : data;
         }
     }
 
