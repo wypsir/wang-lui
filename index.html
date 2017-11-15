@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>layout 后台大布局 - Layui</title>
+    <title>后台管理系统</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -19,18 +19,18 @@
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
-        <div class="layui-logo">layui 后台布局</div>
+        <div class="layui-logo">Wang Admin</div>
         <!-- 头部区域（可配合layui已有的水平导航） -->
-        <ul class="layui-nav layui-layout-right">
+        <ul class="layui-nav layui-layout-right" >
             <li class="layui-nav-item">
                 <a href="javascript:;">
                     <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
                     admin
                 </a>
-                <dl class="layui-nav-child">
-                    <dd><a href="">基本资料</a></dd>
-                    <dd><a href="">安全设置</a></dd>
-                    <dd><a href="">注销</a></dd>
+                <dl class="layui-nav-child" id="side-right">
+                    <dd><a href="#" data-url="/user.html"><i class="layui-icon">&#xe612;</i><cite>基本资料</cite></a></dd>
+                    <dd><a href="#" data-method="setting" class="setting"><i></i><cite>安全设置</cite></a></dd>
+                    <dd><a href="#" data-method="layout" class="layout"><i></i><cite>注销</cite></a></dd>
                 </dl>
             </li>
         </ul>
@@ -53,25 +53,25 @@
             </ul>
             <div class="layui-tab-content clildFrame">
                 <!--<div class="layui-tab-item layui-show">-->
-                    <!--1. 我个人比较喜欢卡片风格的，所以你发现又是以卡片的风格举例-->
-                    <!--2. 删除功能适用于所有风格-->
-                    <!--<div style="padding: 15px;">-->
-                        <!--内容主体区域-->
+                <!--1. 我个人比较喜欢卡片风格的，所以你发现又是以卡片的风格举例-->
+                <!--2. 删除功能适用于所有风格-->
+                <!--<div style="padding: 15px;">-->
+                <!--内容主体区域-->
 
-                        <!--<br><br>-->
-                        <!--<blockquote class="layui-elem-quote">-->
-                            <!--layui 之所以赢得如此多人的青睐，更多是在于它“前后台系统通吃”的能力。既可编织出绚丽的前台页面，又可满足繁杂的后台功能需求。-->
-                            <!--<br>layui 后台布局， 致力于让每一位开发者都能轻松搭建自己的后台模板。-->
-                        <!--</blockquote>-->
+                <!--<br><br>-->
+                <!--<blockquote class="layui-elem-quote">-->
+                <!--layui 之所以赢得如此多人的青睐，更多是在于它“前后台系统通吃”的能力。既可编织出绚丽的前台页面，又可满足繁杂的后台功能需求。-->
+                <!--<br>layui 后台布局， 致力于让每一位开发者都能轻松搭建自己的后台模板。-->
+                <!--</blockquote>-->
 
-                        <!--<a href="/doc/element/layout.html#admin" target="_blank"-->
-                           <!--class="layui-btn layui-btn-big">获取该布局代码</a>-->
+                <!--<a href="/doc/element/layout.html#admin" target="_blank"-->
+                <!--class="layui-btn layui-btn-big">获取该布局代码</a>-->
 
-                        <!--<br><br><br><br>-->
+                <!--<br><br><br><br>-->
 
 
-                        <!--下面是充数内容，为的是出现滚动条<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>-->
-                    <!--</div>-->
+                <!--下面是充数内容，为的是出现滚动条<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>充数内容<br>-->
+                <!--</div>-->
                 <!--</div>-->
                 <div class="layui-tab-item  layui-show">
                     <iframe src="main.html?t=123"></iframe>

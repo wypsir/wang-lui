@@ -1,23 +1,23 @@
 var navs = [{
-	"title": "所有商品",
+	"title": "系统管理",
 	"icon": "&#xe614;",
 	"spread": true,
 	"children": [{
-		"title": "列表一",
-		"icon": "&#xe641;",
-		"href": "li1.html"
+		"title": "用户管理",
+		"icon": "&#xe612;",
+		"href": "user.html"
 	}, {
-		"title": "列表二",
-		"icon": "&#xe63c;",
-		"href": "li2.html"
+		"title": "角色管理",
+		"icon": "&#xe658;",
+		"href": "role.html"
 	}, {
-		"title": "列表三",
-		"icon": "&#xe63c;",
-		"href": "li3.html"
+		"title": "权限管理",
+		"icon": "&#xe671;",
+		"href": "resources.html"
 	} ]
 }, {
 	"title": "解决方案",
-	"icon": "&#xe62a;",
+	"icon": "&#xe621;",
 	"spread": false,
 	"children": [{
 		"title": "方案一",
@@ -30,7 +30,7 @@ var navs = [{
 	} ]
 },  {
 	"title": "百度",
-	"icon": "&#xe62a;",
+	"icon": "&#xe64c;",
 	"href": "https://www.baidu.com",
 	"spread": false
 }, {
@@ -38,4 +38,44 @@ var navs = [{
 	"icon": "&#xe62a;",
 	"href": "parameters.html",
 	"spread": false
+},  {
+    "title": "百度1",
+    "icon": "&#xe64c;",
+    "href": "https://www.baidu.com",
+    "spread": false
+}, {
+    "title": "系统参数1",
+    "icon": "&#xe62a;",
+    "href": "parameters.html",
+    "spread": false
+},  {
+    "title": "百度2",
+    "icon": "&#xe64c;",
+    "href": "https://www.baidu.com",
+    "spread": false
+}, {
+    "title": "系统参数2",
+    "icon": "&#xe62a;",
+    "href": "parameters.html",
+    "spread": false
+},  {
+    "title": "百度3",
+    "icon": "&#xe64c;",
+    "href": "https://www.baidu.com",
+    "spread": false
+}, {
+    "title": "系统参数3",
+    "icon": "&#xe62a;",
+    "href": "parameters.html",
+    "spread": false
+},  {
+    "title": "百度4",
+    "icon": "&#xe64c;",
+    "href": "https://www.baidu.com",
+    "spread": false
+}, {
+    "title": "系统参数4",
+    "icon": "&#xe62a;",
+    "href": "parameters.html",
+    "spread": false
 }];

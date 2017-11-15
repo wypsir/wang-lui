@@ -68,7 +68,7 @@ layui.define(['element', 'jquery', 'common'], function (exports) {
         if (window.sessionStorage.getItem("tabs") !== null) {
             var that = ELEM.tabFilter === undefined ? this.init() : this;
             tabs = JSON.parse(window.sessionStorage.getItem("tabs"));
-            currentTab = window.sessionStorage.getItem("currentTab");
+            currentTab = JSON.parse(window.sessionStorage.getItem("currentTab"));
             for (var i = 0; i < tabs.length; i++) {
                 var title = "";
                 if (tabs[i].icon) {
@@ -83,17 +83,25 @@ layui.define(['element', 'jquery', 'common'], function (exports) {
                     content: content,
                     id: tabs[i].layId
                 })
+                //iframe 自适应
+                ELEM.contentBox.find('iframe[data-id=' + tabs[i].layId + ']').each(function () {
+                    $(this).height(ELEM.contentBox.height());
+                });
                 ELEM.titleBox.find('li').children('i.layui-tab-close[data-id=' + tabs[i].layId + ']')
                     .on('click', function () {
                         var index = $(this).parent('li').index();
-                        tabs.splice((index-1),1);
-                        window.sessionStorage.setItem("tabs",tabs);
-                        window.sessionStorage.setItem("currentTab",currentTab);
+                        tabs.splice((index - 1), 1);
+                        if (tabs[tabs.length - 1]) {
+                            window.sessionStorage.setItem("currentTab", JSON.stringify(tabs[tabs.length - 1]));
+                        } else {
+                            common.data('currentTab', null)
+                        }
+                        window.sessionStorage.setItem("tabs", JSON.stringify(tabs));
                         element.tabDelete(ELEM.tabFilter, $(this).parent('li').attr('lay-id')).init();
                     })
                 if (currentTab == null) {
                     element.tabChange(ELEM.tabFilter, null);
-                } else if (JSON.parse(currentTab).title == tabs[i].title) {
+                } else if (currentTab.title == tabs[i].title) {
                     element.tabChange(ELEM.tabFilter, tabs[i].layId);
                 } else {
                     console.log("currentTab else")
@@ -101,7 +109,6 @@ layui.define(['element', 'jquery', 'common'], function (exports) {
             }
         }
     }
-
 
 
     /**
@@ -137,6 +144,27 @@ layui.define(['element', 'jquery', 'common'], function (exports) {
         return tabId;
     }
 
+    Tab.prototype.initTabContextMenu = function () {
+        ELEM.titleBox.find('li').on('contextmenu', function (e) {
+            var target = $(e.target);
+            e.preventDefault();
+            e.stopPropagation();
+            console.log("target:", target)
+            var div = document.createElement('dev');
+            var ul = '<ul>'
+            ul += '<li data-target="refresh" title="刷新当前选项"><i></i>刷新</li>';
+            ul += '<li data-target="closeCurrent" title="关闭当前选项"><i></i>关闭</li>';
+            ul += '<li data-target="closeOther" title="关闭其他选项"><i></i>关闭其他</li>';
+            ul += '<li data-target="closeAll" title="关闭所有选项"><i></i>关闭所有</li>';
+            ul += '<li data-target="closeRight" title="关闭当前右边选项"><i></i>关闭右边</li>';
+            ul += '<li data-target="closeLeft" title="关闭当前左边选项"><i></i>关闭左边</li>';
+            ul += '</ul>';
+            div.innerHTML = ul;
+            div.style.top = e.pageY + 'px';
+            div.style.left = e.pageX + 'px';
+            document.getElementsByTagName('body')[0].appendChild(div);
+        });
+    }
 
     Tab.prototype.tabAdd = function (data) {
         var that = this;
@@ -176,6 +204,14 @@ layui.define(['element', 'jquery', 'common'], function (exports) {
             if (_config.closed) {
                 ELEM.titleBox.find('li').children('i.layui-tab-close[data-id=' + globalTabIdIndex + ']')
                     .on('click', function () {
+                        var index = $(this).parent('li').index();
+                        tabs.splice((index - 1), 1);
+                        if (tabs[tabs.length - 1]) {
+                            window.sessionStorage.setItem("currentTab", JSON.stringify(tabs[tabs.length - 1]));
+                        } else {
+                            common.data('currentTab', null)
+                        }
+                        window.sessionStorage.setItem("tabs", JSON.stringify(tabs));
                         element.tabDelete(ELEM.tabFilter, $(this).parent('li').attr('lay-id')).init();
                     })
             }
@@ -197,6 +233,76 @@ layui.define(['element', 'jquery', 'common'], function (exports) {
                 _config.elem.find('div.layui-tab-content > div').eq(tabIndex).children('iframe')[0].contentWindow.location.reload();
             }
         }
+
+        if (_config.contextMenu) {
+            !ELEM.titleBox.find('li').not(':first').on('contextmenu', function (e) {
+                var target = $(e.target);
+                e.preventDefault();
+                // e.stopPropagation();
+                console.log("target:", target)
+                var contextMenu = $(document).find('div.admin-contextmenu');
+                if (contextMenu.length < 1) {
+                    contextMenu = that.genContextMenu(e);
+                } else {
+                    contextMenu.css('top', (e.pageY - 5) + 'px');
+                    contextMenu.css('left', e.pageX + 'px');
+                }
+                $(document).find('div.admin-contextmenu').show();
+                $(document).find('div.admin-contextmenu').mouseleave(function () {
+                    $(this).hide();
+                })
+                var id = $(this).find('i.layui-tab-close').data('id');
+                var clickIndex = $(this).attr('lay-id');
+                $(document).find('div.admin-contextmenu').children('ul').find('li').each(function () {
+                    var that = $(this);
+                    that.on('click', function () {
+                        var target = that.data('target');
+                        switch (target) {
+                            case 'refresh':
+                                var src = ELEM.contentBox.find('iframe[data-id=' + id + ']')[0].src;
+                                console.log("refresh:", ELEM.contentBox.find('iframe[data-id=' + id + ']'))
+                                ELEM.contentBox.find('iframe[data-id=' + id + ']')[0].src = src;
+                                break;
+                            case 'close-current':
+                                if (clickIndex > 0) {
+                                    element.tabDelete(ELEM.tabFilter, clickIndex)
+                                }
+                                break;
+                            case 'close-other':
+                                ELEM.titleBox.children('li').each(function () {
+                                    var that = $(this);
+                                    var currentId = $(this).find('i.layui-tab-close').data('id');
+
+                                    if (currentId !== undefined && currentId != id) {
+                                        element.tabDelete(ELEM.tabFilter, that.attr('lay-id'))
+                                    }
+                                })
+
+                                break;
+                            case 'close-all':
+                                ELEM.titleBox.children('li').each(function () {
+                                    var that = $(this);
+                                    if (that.index() !== 0) {
+                                        element.tabDelete(ELEM.tabFilter, that.attr('lay-id'))
+                                    }
+                                })
+                                break;
+                            case 'close-right-all':
+
+                                break;
+                            case 'close-left-all':
+
+                                break;
+                            default :
+
+                                break
+                        }
+                        $(document).find('div.admin-contextmenu').remove();
+                    })
+                })
+
+            });
+        }
     }
 
 
@@ -208,6 +314,25 @@ layui.define(['element', 'jquery', 'common'], function (exports) {
     Tab.prototype.tabDelete = function (id) {
         element.tabDelete(ELEM.tabFilter, id);
         return this;
+    }
+
+    Tab.prototype.genContextMenu = function (e) {
+        var div = document.createElement('div');
+        div.style.width = '130px';
+        div.className = 'admin-contextmenu';
+        div.style.backgroundColor = 'white';
+        var ul = '<ul>'
+        ul += '<li data-target="refresh" title="刷新当前选项"><i></i>刷新</li>';
+        ul += '<li data-target="close-current" title="关闭当前选项"><i></i>关闭</li>';
+        ul += '<li data-target="close-other" title="关闭其他选项"><i></i>关闭其他</li>';
+        ul += '<li data-target="close-all" title="关闭所有选项"><i></i>关闭所有</li>';
+        ul += '<li data-target="close-right-all" title="关闭当前右边选项"><i></i>关闭右边</li>';
+        ul += '<li data-target="close-left-all" title="关闭当前左边选项"><i></i>关闭左边</li>';
+        ul += '</ul>';
+        div.innerHTML = ul;
+        div.style.top = e.pageY + 'px';
+        div.style.left = e.pageX + 'px';
+        return document.getElementsByTagName('body')[0].appendChild(div);
     }
 
     var tab = new Tab();

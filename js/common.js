@@ -27,8 +27,10 @@ layui.define('layer', function (exports) {
         },
         data:function (table, settings) {
             //本地存储
+            console.log(table)
                 table = table || 'wui';
 
+            console.log(table)
                 if(!window.JSON || !window.JSON.parse) return;
 
                 //如果settings为null，则删除表
