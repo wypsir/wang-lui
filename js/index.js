@@ -6,7 +6,8 @@ layui.use(['element', 'navbar', 'tab', 'common'], function () {
     var $ = layui.jquery
         , element = layui.element,
         common = layui.common,
-        navbar = layui.navbar;
+        navbar = layui.navbar,
+        layer = layui.layer;
     tab = layui.tab({
         elem: '.admin-nav-card',
         contextMenu: true,
@@ -18,6 +19,7 @@ layui.use(['element', 'navbar', 'tab', 'common'], function () {
         data: navs,
         // url:'datas/nav.json'
     })
+    console.log(navs)
     navbar.render();
     navbar.on('click(side)', function (data) {
         var othis = $(this);
@@ -106,23 +108,23 @@ layui.use(['element', 'navbar', 'tab', 'common'], function () {
             });
         }, layout: function () {
             //示范一个公告层
-            layer.open({
-                title: '系统提示'
-                , content: '<li><i class="layui-icon">&#xe60c;</i><cite>您确定注销系统吗？</cite></li>',
-                btn: ['确定', '取消']
-                , success: function (layero) {
+            layer.confirm( '确定要注销系统吗？', {icon: 2, title: '系统提示'}, function (index) {
+                    layer.msg("正在注销系统...")
+                    layer.close(index);
 
                 }
-            });
+            );
         },
     }
 
-    // $('#side-right a').on('click', function () {
-    //     var that = $(this), method = that.data('method');
-    //     active[method] ? active[method].call(this, that) : '';
-    // })
-
-    $(".layout").on('click', function () {
-        active.layout();
+    $('#side-right a').on('click', function () {
+        var that = $(this), method = that.data('method');
+        console.log(that)
+        console.log(method)
+            active[method] ? active[method].call(this, that) : '';
     })
+
+    // $(".layout").on('click', function () {
+    //     active.layout();
+    // })
 });

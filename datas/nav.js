@@ -1,81 +1,88 @@
 var navs = [{
-	"title": "系统管理",
-	"icon": "&#xe614;",
-	"spread": true,
-	"children": [{
-		"title": "用户管理",
-		"icon": "&#xe612;",
-		"href": "user.html"
-	}, {
-		"title": "角色管理",
-		"icon": "&#xe658;",
-		"href": "role.html"
-	}, {
-		"title": "权限管理",
-		"icon": "&#xe671;",
-		"href": "resources.html"
-	} ]
+    "title": "系统设置",
+    "icon": "&#xe614;",
+    "spread": true,
+    "children": [{
+        "title": "用户列表",
+        "icon": "&#xe613;",
+        "href": "page/user/user.html"
+    }, {
+        "title": "角色列表",
+        "icon": "&#xe658;",
+        "href": "role.html"
+    }, {
+        "title": "菜单列表",
+        "icon": "&#xe671;",
+        "href": "resources.html"
+    }]
 }, {
-	"title": "解决方案",
-	"icon": "&#xe621;",
-	"spread": false,
-	"children": [{
-		"title": "方案一",
-		"icon": "&#xe62a;",
-		"href": "plan1.html"
-	}, {
-		"title": "方案二",
-		"icon": "&#xe62a;",
-		"href": "plan2.html"
-	} ]
-},  {
-	"title": "百度",
-	"icon": "&#xe64c;",
-	"href": "https://www.baidu.com",
-	"spread": false
+    "title": "个人中心",
+    "icon": "&#xe612;",
+    "spread": false,
+    "children": [{
+        "title": "个人资料",
+        "icon": "&#xe62a;",
+        "href": "page/user/addUser.html"
+    },{
+        "title": "我的消息",
+        "icon": "&#xe62a;",
+        "href": "plan1.html"
+    }, {
+        "title": "我的通知",
+        "icon": "&#xe62a;",
+        "href": "plan2.html"
+    }]
 }, {
-	"title": "系统参数",
-	"icon": "&#xe62a;",
-	"href": "parameters.html",
-	"spread": false
-},  {
-    "title": "百度1",
+    "title": "会员中心",
+    "icon": "&#xe612;",
+    "spread": false,
+    "children": [{
+        "title": "注册会员列表",
+        "icon": "&#xe62a;",
+        "href": "plan1.html"
+    }]
+}, {
+    "title": "内容管理",
+    "icon": "&#xe612;",
+    "spread": false,
+    "children": [{
+        "title": "网站栏目管理",
+        "icon": "&#xe62a;",
+        "href": "plan1.html"
+    } ]
+}, {
+    "title": "地址簿",
     "icon": "&#xe64c;",
-    "href": "https://www.baidu.com",
-    "spread": false
+    "spread": false,
+    "children": [{
+        "title": "网站栏目管理",
+        "icon": "&#xe64c;",
+        "href": "https://www.baidu.com",
+    }]
 }, {
-    "title": "系统参数1",
-    "icon": "&#xe62a;",
-    "href": "parameters.html",
-    "spread": false
-},  {
-    "title": "百度2",
-    "icon": "&#xe64c;",
-    "href": "https://www.baidu.com",
-    "spread": false
+    "title": "开发维护",
+    "icon": "&#xe612;",
+    "spread": false,
+    "children": [{
+        "title": "配置表",
+        "icon": "&#xe62a;",
+        "href": "plan1.html"
+    }, {
+        "title": "任务调度",
+        "icon": "&#xe62a;",
+        "href": "plan2.html"
+    }, {
+        "title": "系统参数",
+        "icon": "&#xe62a;",
+        "href": "parameters.html"
+    }]
 }, {
-    "title": "系统参数2",
-    "icon": "&#xe62a;",
-    "href": "parameters.html",
-    "spread": false
-},  {
-    "title": "百度3",
-    "icon": "&#xe64c;",
-    "href": "https://www.baidu.com",
-    "spread": false
-}, {
-    "title": "系统参数3",
-    "icon": "&#xe62a;",
-    "href": "parameters.html",
-    "spread": false
-},  {
-    "title": "百度4",
-    "icon": "&#xe64c;",
-    "href": "https://www.baidu.com",
-    "spread": false
-}, {
-    "title": "系统参数4",
-    "icon": "&#xe62a;",
-    "href": "parameters.html",
-    "spread": false
+    "title": "系统监控",
+    "icon": "&#xe612;",
+    "spread": false,
+    "children": [{
+        "title": "Druid",
+        "icon": "&#xe62a;",
+        "href": "user.html"
+    }]
 }];
